@@ -6,6 +6,7 @@ import repository.IssuesRepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class IssuesManager {
     private IssuesRepository repository = new IssuesRepository();
@@ -14,37 +15,30 @@ public class IssuesManager {
 
     }
 
-    public void add (Issue issue){
+    public void add(Issue issue) {
         repository.save(issue);
     }
 
     public Issue[] getAll() {
         return repository.findAll();
     }
-    public Collection<Issue> findClosed () {
-        List<Issue> result = new ArrayList<>();
-        for (Issue issue : repository.findAll()) {
-            if (issue.getIsClosed()) {
-                result.add(issue);
-            }
-        }
-        return result;
+
+    public Collection<Issue> findClosed() {
+        return filterBy(Issue::getIsClosed);
     }
 
-    public Collection<Issue> findOpen () {
-        List<Issue> result = new ArrayList<>();
-        for (Issue issue : repository.findAll()) {
-            if (!issue.getIsClosed()) {
-                result.add(issue);
-            }
-        }
-        return result;
+    public Collection<Issue> findOpen() {
+        return filterBy(issue -> !issue.getIsClosed());
     }
 
-    public Collection<Issue> findByAuthor (String author) {
+    public Collection<Issue> findByAuthor(String author) {
+        return filterBy(issue -> issue.getAuthor().equalsIgnoreCase(author));
+    }
+
+    private Collection<Issue> filterBy(Predicate<Issue> filter) {
         List<Issue> result = new ArrayList<>();
         for (Issue issue : repository.findAll()) {
-            if (issue.getAuthor().equals(author)) {
+            if (filter.test(issue)) {
                 result.add(issue);
             }
         }

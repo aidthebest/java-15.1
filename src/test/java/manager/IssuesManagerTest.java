@@ -6,18 +6,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import repository.IssuesRepository;
 
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class IssuesManagerTest {
     private IssuesManager manager = new IssuesManager(new IssuesRepository());
 
 
-    private Issue first = new Issue(1, true, "VKO", "AER", "Belov");
-    private Issue second = new Issue(2, false, "SVO", "SIP", "Chernov");
-    private Issue third = new Issue(3, false, "DME", "TAS", "Ivanov");
-    private Issue four = new Issue(4, true, "DME", "TBS", "Belov");
-    private Issue fifth = new Issue(5, true, "VKO", "AER", "Belov");
-    private Issue sixt = new Issue(6, false, "VKO", "AER", "Chernov");
+    private Issue first = new Issue(1, true, "VKO", "AER", Collections.singleton("Belov"));
+    private Issue second = new Issue(2, false, "SVO", "SIP", Collections.singleton("Chernov"));
+    private Issue third = new Issue(3, false, "DME", "TAS", Collections.singleton("Ivanov"));
+    private Issue four = new Issue(4, true, "DME", "TBS", Collections.singleton("Belov"));
+    private Issue fifth = new Issue(5, true, "VKO", "AER", Collections.singleton("Belov"));
+    private Issue sixt = new Issue(6, false, "VKO", "AER", Collections.singleton("Chernov"));
 
     @BeforeEach
     void SetUp() {
@@ -65,7 +67,5 @@ class IssuesManagerTest {
         assertArrayEquals(expected, actual);
 
     }
-
-
 
 }

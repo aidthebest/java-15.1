@@ -24,16 +24,28 @@ public class IssuesManager {
     }
 
     public Collection<Issue> findClosed() {
-        return filterBy(Issue::getIsClosed);
+        return filterBy(Issue::isClosed);
     }
 
     public Collection<Issue> findOpen() {
-        return filterBy(issue -> !issue.getIsClosed());
+        return filterBy(issue -> !issue.isClosed());
     }
 
     public Collection<Issue> findByAuthor(String author) {
         return filterBy(issue -> issue.getAuthor().equalsIgnoreCase(author));
     }
+
+    public Collection<Issue> findById(int id) {
+        return filterBy(issue -> issue.getId() == id);
+    }
+
+//    public void closeById (int id) {
+//
+//    }
+//
+//    public void openById (int id) {
+//
+//    }
 
     private Collection<Issue> filterBy(Predicate<Issue> filter) {
         List<Issue> result = new ArrayList<>();

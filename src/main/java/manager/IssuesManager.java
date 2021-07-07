@@ -40,9 +40,11 @@ public class IssuesManager {
     }
 
 //    public void closeById (int id) {
+//        IssuesManager manager = new IssuesManager(new IssuesRepository());
+//        Collection<Issue> result = manager.findById(id);
 //
 //    }
-//
+
 //    public void openById (int id) {
 //
 //    }

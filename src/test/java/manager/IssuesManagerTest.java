@@ -68,4 +68,14 @@ class IssuesManagerTest {
 
     }
 
+    @Test
+    void shouldGetById () {
+        Issue[] expected = {sixt};
+        Issue[] actual = manager.findById(6).toArray(new Issue[0]);
+        assertArrayEquals(expected, actual);
+
+    }
+
+
+
 }

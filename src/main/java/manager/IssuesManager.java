@@ -3,9 +3,7 @@ package manager;
 import domain.Issue;
 import repository.IssuesRepository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 
 public class IssuesManager {
@@ -39,15 +37,27 @@ public class IssuesManager {
         return filterBy(issue -> issue.getId() == id);
     }
 
-//    public void closeById (int id) {
-//        IssuesManager manager = new IssuesManager(new IssuesRepository());
-//        Collection<Issue> result = manager.findById(id);
-//
-//    }
+    public void closeById(int id) {
+        for (Issue issue : this.findById(id)) {
+            issue.setClosed(true);
+        }
+    }
 
-//    public void openById (int id) {
-//
-//    }
+    public void openById(int id) {
+        for (Issue issue : this.findById(id)) {
+            issue.setClosed(false);
+        }
+    }
+
+    public Collection<Issue> findByAssignee (Set<String> assignees) {
+        List<Issue> result = new ArrayList<>();
+        for (Issue issue : repository.findAll()){
+            if (issue.getAssignees() == assignees) {
+                result.add(issue);
+            }
+        }
+        return result;
+    }
 
     private Collection<Issue> filterBy(Predicate<Issue> filter) {
         List<Issue> result = new ArrayList<>();

@@ -18,12 +18,6 @@ public class Issue {
     private boolean isClosed;
     private String author;
     private String label;
-    private Set<String> assignees = new HashSet<>();
-
-    public void addAssignee(String assignee){
-        assignees.add(assignee);
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -37,6 +31,24 @@ public class Issue {
     public int hashCode() {
         return Objects.hash(id, isClosed, author, label, assignees);
     }
+
+    private Set<String> assignees = new HashSet<>();
+
+
+    public void setAssignees(Set<String> assignees) {
+        this.assignees = assignees;
+    }
+
+    public Set<String> getAssignees(Set<String> assignees) {
+        return this.assignees;
+    }
+
+
+
+    public void addAssignee(String assignee){
+        assignees.add(assignee);
+    }
+
 }
 
 

@@ -76,6 +76,28 @@ class IssuesManagerTest {
 
     }
 
+    @Test
+    void shouldSetClosedById () {
+        manager.closeById(3);
+        Issue[] expected = {second, sixt};
+        Issue[] actual = manager.findOpen().toArray(new Issue[0]);
+        assertArrayEquals(expected, actual);
 
+    }
 
+    @Test
+    void shouldSetOpenById () {
+        manager.openById(1);
+        Issue[] expected = {second, sixt, first, third};
+        Issue[] actual = manager.findOpen().toArray(new Issue[0]);
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    void shouldFilterByAssignee () {
+        Issue[] expected = {first, four, fifth};
+        Issue[] actual = manager.findByAssignee(Collections.singleton("Belov")).toArray(new Issue[0]);
+        assertArrayEquals(expected, actual);
+    }
 }

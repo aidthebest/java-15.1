@@ -51,8 +51,8 @@ public class IssuesManager {
 
     public Collection<Issue> findByAssignee (Set<String> assignees) {
         List<Issue> result = new ArrayList<>();
-        for (Issue issue : repository.findAll()){
-            if (issue.getAssignees() == assignees) {
+        for (Issue issue : repository.findAll()) {
+            if (issue.getAssignees().equals(assignees)) {
                 result.add(issue);
             }
         }

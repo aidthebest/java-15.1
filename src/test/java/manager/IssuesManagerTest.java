@@ -96,7 +96,7 @@ class IssuesManagerTest {
 
     @Test
     void shouldFilterByAssignee () {
-        Issue[] expected = {first, four, fifth};
+        Issue[] expected = {fifth, first, four};
         Issue[] actual = manager.findByAssignee(Collections.singleton("Belov")).toArray(new Issue[0]);
         assertArrayEquals(expected, actual);
     }
